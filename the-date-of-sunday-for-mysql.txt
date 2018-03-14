@@ -1,0 +1,16 @@
+项目需要，查阅其他博客，想到此方法，做个记录。
+
+SELECT subdate(DATE_FORMAT(NOW(),"%Y-%m-%d"
+
+),INTERVAL if(date_format(DATE_FORMAT(NOW(),"%Y-%m-%d"),'%w') = 0 ,7,date_format(DATE_FORMAT(NOW(),"%Y-%m-%d"),'%w'))-7 
+DAY)  sunday
+;
+-- 得到现在是周几
+SELECT date_format(DATE_FORMAT(NOW(),"%Y-%m-%d"),'%w')
+;
+-- 如果现在是0（周日），则返回7；否则返回当前当前值
+SELECT if(date_format(DATE_FORMAT(NOW(),"%Y-%m-%d"),'%w') = 0 ,7,date_format(DATE_FORMAT(NOW(),"%Y-%m-%d"),'%w'))
+总体思路：
+当前日期减去当前是周几，得到上周日的日期。
+再加上7天，得到本周日日期。
+无论想得到周几的日期，按此思路即可实现。
